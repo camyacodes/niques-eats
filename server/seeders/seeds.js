@@ -10,8 +10,16 @@ db.once("open", async () => {
   const userData = [];
   // TO-DO ADD FIRST NAME LAST NAME
   for (let i = 0; i < 10; i += 1) {
-    const username = faker.internet.userName();
-    const email = faker.internet.email({ username });
+    const first = faker.person.firstName();
+    const last = faker.person.lastName();
+    const username = faker.internet.userName({
+      firstName: first,
+      lastName: last,
+    });
+    const email = faker.internet.email({
+      firstName: first,
+      lastName: last,
+    });
     const password = faker.internet.password();
     userData.push({ username, email, password });
   }
@@ -381,7 +389,7 @@ db.once("open", async () => {
       username: createdUsers[3].username,
       address: "123 jefferson lane",
       address2: "Apt 2",
-      email: "test@test.com",
+      email: createdUsers[3].email,
       firstName: "Test",
       city: "Orlando",
       state: "Florida",
@@ -396,7 +404,31 @@ db.once("open", async () => {
       ],
       total: "33",
     },
+    {
+      username: createdUsers[0].username,
+      address: "456 jefferson lane",
+      address2: "Apt 6",
+      email: createdUsers[0].email,
+      firstName: "Test",
+      city: "Orlando",
+      state: "Florida",
+      lastName: "testlast",
+      phone: "5555555555",
+      zipCode: "32697",
+      products: [products[1]._id, products[5]._id],
+      total: "15",
+    },
   ]);
+
+  await User.updateOne(
+    { username: createdUsers[3].username },
+    { $push: { orders: orders[0]._id } }
+  );
+
+  await User.updateOne(
+    { username: createdUsers[0].username },
+    { $push: { orders: orders[1]._id } }
+  );
 
   console.log("orders seeded");
 

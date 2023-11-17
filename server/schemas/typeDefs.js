@@ -45,7 +45,7 @@ const typeDefs = gql`
   type Query {
     products(category: ID): [Product]
     categories: [Category]
-    orders: [Order]
+    orders(username: String): [Order]
     users: [User]
   }
 `;

@@ -3,7 +3,7 @@ const { User, Product, Category, Order } = require("../models");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find();
+      return User.find().populate("orders");
     },
     // find products by category ex: Brunch Sides, Dinner Drinks, etc
     products: async (parent, { category }) => {
