@@ -62,7 +62,6 @@ const typeDefs = gql`
       zipCode: String
       email: String
       phone: String
-
       total: String
     ): Order
   }
