@@ -1,8 +1,11 @@
 const { User, Product, Category, Order } = require("../models");
+const { AuthenticationError } = require("apollo-server-express");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
+  // -----------------------------------QUERIES(R)---------------------------------- //
   Query: {
-    // Fnd users by username or all users
+    // Fnd USERS by username or all users
     users: async (parent, username) => {
       const params = username ? username : {};
       return User.find(params)
@@ -19,17 +22,17 @@ const resolvers = {
         })
         .select("-__v -password");
     },
-    // find products by category ex: Brunch Sides, Dinner Drinks, etc or just all products
+    // find PRODUCTS by category ex: Brunch Sides, Dinner Drinks, etc or just all products
     products: async (parent, category) => {
       const params = {};
       params.category = category ? category : {};
       return Product.find(params.category).populate("category");
     },
-    // Find all categories
+    // Find all CATEGORIES
     categories: async () => {
       return Category.find();
     },
-    // Find orders by specific user or just all orders
+    // Find ORDERS by specific user or just all orders
     orders: async (parent, username) => {
       const params = username ? username : {};
       return Order.find(params).populate({
@@ -40,6 +43,33 @@ const resolvers = {
           model: "Category",
         },
       });
+    },
+  },
+  // -------------------------------------------MUTATIONS(CUD)---------------------------------- //
+  Mutation: {
+    // CREATE A NEW USER / SIGNUP
+    addUser: async (parents, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
+      return { token, user };
+    },
+    // LOGIN MUTATION W/ AUTHENTICATORS
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+
+      const token = signToken(user);
+
+      return { token, user };
     },
   },
 };
