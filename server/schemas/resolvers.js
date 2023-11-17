@@ -5,7 +5,28 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   // -----------------------------------QUERIES(R)---------------------------------- //
   Query: {
-    // Fnd USERS by username or all users
+    //If user is logged in and jas a jwt token
+    loggedInUser: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id })
+          .populate({
+            path: "orders",
+            populate: {
+              path: "products",
+              model: "Product",
+              populate: {
+                path: "category",
+                model: "Category",
+              },
+            },
+          })
+          .select("-__v -password");
+
+        return userData;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+    // Find USERS by username or all users
     users: async (parent, username) => {
       const params = username ? username : {};
       return User.find(params)

@@ -47,6 +47,7 @@ const typeDefs = gql`
     categories: [Category]
     orders(username: String): [Order]
     users(username: String): [User]
+    loggedInUser: User
   }
 
   type Mutation {
