@@ -12,10 +12,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-server-express": "^3.13.0",
     "bcrypt": "*",
     "dotenv": "^16.3.1",
     "express": "*",
-    "mongoose": "*"
+    "graphql": "^16.8.1",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.0.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
