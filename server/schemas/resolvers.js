@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const { User, Product, Category, Order } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
@@ -91,6 +92,27 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    addOrder: async (parent, args, context) => {
+      if (context.user) {
+        // Convert product IDs to ObjectId
+        // const productIds = args.products.map(
+        //   (productId) => new mongoose.Types.ObjectId(productId)
+        // );
+        const order = await Order.create({
+          ...args,
+          username: context.user.username,
+        });
+
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { orders: order._id } },
+          { new: true }
+        );
+
+        return order;
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };

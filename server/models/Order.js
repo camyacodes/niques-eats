@@ -17,12 +17,12 @@ const orderSchema = new Schema({
   lastName: { type: String },
   phone: { type: String },
   zipCode: { type: String },
-  products: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Product",
-    },
-  ],
+  // products: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "Product",
+  //   },
+  // ],
   purchaseDate: {
     type: Date,
     default: Date.now,
