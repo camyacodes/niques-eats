@@ -1,10 +1,5 @@
 // CONNECT FRONT END TO BACK END USING APOLLO CLIENT
-import {
-  ApolloProvider,
-  ApolloClient,
-  InMemoryCache,
-  createHttpLink,
-} from "@apollo/client";
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import React from "react";
 // COMPONENTS
 import Header from "./components/Header";
@@ -12,12 +7,9 @@ import Footer from "./components/Footer";
 // PAGES
 import Menu from "./pages/Menu";
 
-const httpLink = createHttpLink({
-  uri: "http://localhost:27017/graphql",
-});
-
 const client = new ApolloClient({
   uri: "/graphql",
+  cache: new InMemoryCache(),
 });
 // everything between the JSX Apollo Provider tags will eventually have access to the server's API data through the client we set up
 function App() {
