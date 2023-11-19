@@ -28,7 +28,7 @@ import Auth from "./utils/auth";
 import Cart from "./components/Cart";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:27017/graphql",
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -40,11 +40,15 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+
+// const client = new ApolloClient({
+//   link: httpLink,
+//   cache: new InMemoryCache(),
+// });
 
 function App() {
   return (
@@ -57,8 +61,8 @@ function App() {
             <div>
               <Routes>
                 <Route path="/" element={<Home />} />
-                {/* <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} /> */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
                 {/* <Route path="/profile" element={<Profile />} />
                 <Route path="/profile/:username?" component={<Profile />} /> */}
                 <Route path="/menu" element={<MenuBrunch />} />

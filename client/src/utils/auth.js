@@ -2,7 +2,7 @@ import { jwtDecode } from "jwt-decode";
 
 class AuthService {
   getProfile() {
-    // return decode(this.getToken());
+    return jwtDecode(this.getToken());
   }
 
   loggedIn() {
@@ -11,27 +11,28 @@ class AuthService {
     return !!token && !this.isTokenExpired(token); // handwaiving here
   }
 
-  // isTokenExpired(token) {
-  //   try {
-  //     // const decoded = decode(token);
-  //     if (decoded.exp < Date.now() / 1000) {
-  //       return true;
-  //     } else return false;
-  //   } catch (err) {
-  //     return false;
-  //   }
-  // }
+  isTokenExpired(token) {
+    try {
+      const decoded = jwtDecode(token);
+      if (decoded.exp < Date.now() / 1000) {
+        return true;
+      } else return false;
+    } catch (err) {
+      return false;
+    }
+  }
 
   getToken() {
     // Retrieves the user token from localStorage
     return localStorage.getItem("id_token");
   }
 
+  // set token to localStorage and reload page to homepage
   login(idToken) {
     // Saves user token to localStorage
     localStorage.setItem("id_token", idToken);
 
-    window.location.assign("/menu");
+    window.location.assign("/");
   }
 
   logout() {

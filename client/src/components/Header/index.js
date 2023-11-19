@@ -2,12 +2,11 @@ import React from "react";
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-// import {QUERY_ME} from '../../utils/queries'
+import { QUERY_LOGGEDINUSER } from "../../utils/queries";
 import "./style.css";
 
 const Header = () => {
-  // const { data: userData } = useQuery(QUERY_ME);
-  const userData = 1;
+  const { data: userData } = useQuery(QUERY_LOGGEDINUSER);
 
   const logout = (event) => {
     event.preventDefault();
@@ -53,16 +52,15 @@ const Header = () => {
             {Auth.loggedIn() && userData ? (
               <>
                 <li className="nav-item dropdown">
-                  <a
+                  <p
                     className="nav-link dropdown-toggle nav-item"
-                    href="#"
                     id="navbarDropdown"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    {/* {userData.me.username} */}
-                  </a>
+                    {userData.loggedInUser.username}
+                  </p>
                   <ul
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdown"

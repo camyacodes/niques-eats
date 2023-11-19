@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
-import '../index.css'
-import Cart from '../components/Cart';
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
+import Auth from "../utils/auth";
+import "../index.css";
+import Cart from "../components/Cart";
+
 const Signup = () => {
   const [formState, setFormState] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
   const [addUser, { error }] = useMutation(ADD_USER);
 
@@ -30,7 +31,7 @@ const Signup = () => {
       const { data } = await addUser({
         variables: { ...formState },
       });
-console.log(data)
+
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
@@ -38,8 +39,8 @@ console.log(data)
   };
 
   return (
-    <main className="flex-row justify-center mb-4" id ="signup">
-        <Cart />
+    <main className="flex-row justify-center mb-4" id="signup">
+      <Cart />
       <div className="col-12 col-md-6">
         <div className="card">
           <h4 className="card-header">Sign Up</h4>

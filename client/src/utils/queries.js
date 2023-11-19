@@ -38,6 +38,30 @@ export const QUERY_DISHTYPES = gql`
   }
 `;
 
+export const QUERY_LOGGEDINUSER = gql`
+  {
+    loggedInUser {
+      _id
+      username
+      email
+      orders {
+        _id
+        firstName
+        lastName
+        address
+        address2
+        city
+        state
+        zipCode
+        email
+        phone
+        purchaseDate
+        total
+      }
+    }
+  }
+`;
+
 // export const QUERY_PRODUCT = gql`
 //   query products($id: ID!) {
 //     products(_id: $id) {

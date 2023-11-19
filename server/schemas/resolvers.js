@@ -13,24 +13,13 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   // -----------------------------------QUERIES(R)---------------------------------- //
   Query: {
-    //If user is logged in and jas a jwt token
+    //If user is logged in and has a jwt token
     loggedInUser: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .populate({
             path: "orders",
-            populate: {
-              path: "products",
-              model: "Product",
-              populate: {
-                path: "dishTypes",
-                model: "DishType",
-              },
-              populate: {
-                path: "servingTimes",
-                model: "ServingTime",
-              },
-            },
+            model: "Order",
           })
           .select("-__v -password");
 
@@ -44,18 +33,7 @@ const resolvers = {
       return User.find(params)
         .populate({
           path: "orders",
-          populate: {
-            path: "products",
-            model: "Product",
-            populate: {
-              path: "dishTypes",
-              model: "DishType",
-            },
-            populate: {
-              path: "servingTimes",
-              model: "ServingTime",
-            },
-          },
+          model: "Order",
         })
         .select("-__v -password");
     },
