@@ -78,18 +78,7 @@ const resolvers = {
     // Find ORDERS by specific user or just all orders
     orders: async (parent, username) => {
       const params = username ? username : {};
-      return Order.find(params).populate({
-        path: "products",
-        model: "Product",
-        populate: {
-          path: "dishTypes",
-          model: "DishType",
-        },
-        populate: {
-          path: "servingtimes",
-          model: "ServingTime",
-        },
-      });
+      return Order.find(params);
     },
   },
   // -------------------------------------------MUTATIONS(CUD)---------------------------------- //

@@ -14,43 +14,41 @@ export const LOGIN_USER = gql`
 
 export const ADD_ORDER = gql`
   mutation addOrder(
+    $firstName: String!
+    $lastName: String!
     $address: String!
     $address2: String!
-    $email: String!
-    $firstName: String!
     $city: String!
     $state: String!
-    $lastName: String!
-    $phone: String!
     $zipCode: String!
-    $products: [ID!]
-    $total: String
+    $email: String!
+    $phone: String!
+    $total: String!
   ) {
     addOrder(
+      firstName: $firstName
+      lastName: $lastName
       address: $address
       address2: $address2
-      email: $email
-      firstName: $firstName
       city: $city
       state: $state
-      lastName: $lastName
-      phone: $phone
       zipCode: $zipCode
-      products: $products
+      email: $email
+      phone: $phone
       total: $total
     ) {
       _id
+      username
+      firstName
+      lastName
       address
       address2
-      email
-      firstName
       city
       state
-      lastName
-      phone
       zipCode
+      email
+      phone
       purchaseDate
-      products
       total
     }
   }

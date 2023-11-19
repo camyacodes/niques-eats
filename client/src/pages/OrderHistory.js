@@ -2,18 +2,28 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
+import Auth from "../utils/auth";
+
 import { QUERY_LOGGEDINUSER } from "../utils/queries";
+
 import "../styles/orderHistory.css";
 import Cart from "../components/Cart";
 
 function OrderHistory() {
   // const [orders, setOrders] = useState([])
 
-  const { loading, data } = useQuery(QUERY_LOGGEDINUSER);
+  const { data } = useQuery(QUERY_LOGGEDINUSER);
 
-  const orders = data?.orders || [];
+  // const orders = data.loggedInUser.orders || [];
 
-  console.log(orders);
+  let orders;
+
+  if (data && Auth.loggedIn()) {
+    orders = data.loggedInUser.orders;
+    console.log(data.loggedInUser.orders);
+  } else {
+    console.log("hey");
+  }
 
   // useEffect(() => {
   //     if (data) {
