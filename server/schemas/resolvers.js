@@ -89,11 +89,13 @@ const resolvers = {
       }
     },
     // Find all CATEGORIES
-    dishTypes: async () => {
-      return DishType.find();
+    dishTypes: async (parent, name) => {
+      params = name ? name : {};
+      return DishType.find(params);
     },
-    servingTimes: async () => {
-      return ServingTime.find();
+    servingTimes: async (parent, name) => {
+      params = name ? name : {};
+      return ServingTime.find(params);
     },
     // Find ORDERS by specific user or just all orders
     orders: async (parent, username) => {

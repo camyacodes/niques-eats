@@ -28,7 +28,7 @@ db.once("open", async () => {
 
   console.log("users seeded");
 
-  await DishType.deleteMany;
+  await DishType.deleteMany();
 
   const dishTypes = await DishType.insertMany([
     { name: "Entree" },
@@ -38,7 +38,7 @@ db.once("open", async () => {
   ]);
   console.log("Dish Types seeded");
 
-  await ServingTime.deleteMany;
+  await ServingTime.deleteMany();
 
   const servingTimes = await ServingTime.insertMany([
     { name: "Brunch" },

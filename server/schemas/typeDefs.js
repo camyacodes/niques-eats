@@ -46,7 +46,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    products(dishType: String, servingTime: String): [Product]
+    products(dishType: ID, servingTime: ID): [Product]
     dishTypes(name: String): [DishType]
     servingTimes(name: String): [ServingTime]
     orders(username: String): [Order]
