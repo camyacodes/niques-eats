@@ -10,6 +10,7 @@ import {
   CardSubtitle,
   Col,
   Container,
+  Row,
 } from "reactstrap";
 import "./style.css";
 import "react-datetime/css/react-datetime.css";
@@ -68,27 +69,27 @@ function ProductItem({ products }) {
   // 	const end = moment().add(10, "days");
   // 	return moment(current).isBetween(start, end);
   // };
-  if (!products.length) {
-    return <h3>Check back later for our update menu!</h3>;
-  }
+  // if (!products.length) {
+  //   return <h3>Check back later for our update menu!</h3>;
+  // }
   return (
-    <div>
+    <Row>
       {products &&
-        products.map((product) => (
+        products.map((products) => (
           <Container
-            className="themed-container p-5"
+            className="themed-container"
             fluid={true}
             id="dish-card"
-            key={product._id}
+            key={products._id}
           >
-            <Col key={product._id}>
+            <Col key={products._id}>
               <Card id="dish-card-content">
                 <div>
                   <CardImg
                     top
                     width="100%"
-                    src={`/images/${product.image}`}
-                    alt={product.name}
+                    src={`/images/${products.image}`}
+                    alt={products.name}
                     id="dish-img"
                     className="rounded mx-auto d-block"
                   />
@@ -97,14 +98,14 @@ function ProductItem({ products }) {
                 <CardBody>
                   <div className="row">
                     <CardTitle tag="h5" className="col " id="card-text">
-                      {product.name}
+                      {products.name}
                     </CardTitle>
                     <CardSubtitle
                       tag="h5"
                       className="col text-end"
                       id="card-text"
                     >
-                      ${product.price}
+                      ${products.price}
                     </CardSubtitle>
                   </div>
                   <div id="card-btn">
@@ -120,7 +121,7 @@ function ProductItem({ products }) {
             </Col>
           </Container>
         ))}
-    </div>
+    </Row>
   );
 }
 

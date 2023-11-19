@@ -7,6 +7,7 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_PRODUCTS } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 import { useProductReducer } from "../../utils/reducers";
+import { Row } from "reactstrap";
 
 const ProductList = () => {
   const [state, dispatch] = useStoreContext();
@@ -56,9 +57,9 @@ const ProductList = () => {
   }
   return (
     <div>
-      <div className="row row-cols-4 row-cols-md-4">
+      <Row>
         {loading ? <div>Loading...</div> : <ProductItem products={products} />}
-      </div>
+      </Row>
     </div>
   );
 };
