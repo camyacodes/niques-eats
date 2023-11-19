@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useState } from "react";
+import Hero from "../components/Hero";
+import HomeInfoCards from "../components/home-info-cards";
+import About from "../components/About";
+import Contact from "../components/Contact";
+import Cart from "../components/Cart";
+import '../components/home-info-cards/style.css'
+
+
 
 const Home = () => {
   return (
-    <main>
-      <div className='flex-row justify-space-between'>
-        <div className='col-12 mb-3'>{/* PRINT THOUGHT LIST */}</div>
-      </div>
-    </main>
+    <div>
+    <div id="cart">
+        <Cart />
+        </div>
+    <div>
+      <Hero />
+    </div>
+    <div>
+      <HomeInfoCards />
+    </div>
+    <div>
+      <About />
+    </div>
+    <div>
+      <Contact />
+    </div>
+    </div>
   );
 };
 

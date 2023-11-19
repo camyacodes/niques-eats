@@ -1,0 +1,26 @@
+
+.title {
+    background-color:#fffaf4;
+    margin: 2vw;
+    font-size: 5vw;
+}
+
+.table{
+    background-color: var(--tertiary);
+}
+
+#order-history th {
+    color: var(--tertiary);
+    background-color: var(--primary) ;
+    border: 0.1vw solid #38230a7c;
+}
+
+#order-history td {
+    color: var(--dark);
+    border: 0.1vw solid #77480e7c;
+}
+
+#product-content {
+	word-break: break-all;
+	
+}

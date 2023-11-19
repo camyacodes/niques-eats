@@ -1,0 +1,53 @@
+/* HERO SECTION */
+.bgimage {
+	max-width: 100%;
+	height:50vw;
+	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+		url("../../assets/salmon_meal.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+#hero-text {
+	margin: 0;
+	position: absolute;
+	top: 30vw;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: var(--tertiary);
+	text-shadow: 2px 2px #333;
+}
+#sub-title {
+	font-size: 2.5vw;
+}
+#order-b {
+	color:var(--quatrinary) !important;
+	font-size: 3.5vw;
+	margin:2vw;
+}
+
+@media screen and (max-width: 768px) {
+	.bgimage{
+		position: relative;
+	}
+	#hero-text {
+		position: absolute;
+		top: 30vw;
+	}
+	#sub-title {
+		font-size: 3.5vw;
+	}
+}
+
+
+@media screen and (max-width: 398px) {
+	#hero-text {	
+		top: 30vw;		
+	}
+}
+
+@media screen and (max-width: 272px) {
+	#hero-text {	
+		top: 30vw;		
+	}
+}

@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
+import "./style.css"
+
 
 const Footer = () => {
   return (
-    <footer className="w-100 mt-auto bg-secondary p-4">
-      <div className="container">
-        &copy;2023 by C<sup>2</sup>
-      </div>
+    <footer className='p-1'>
+      &copy;C²
     </footer>
   );
 };

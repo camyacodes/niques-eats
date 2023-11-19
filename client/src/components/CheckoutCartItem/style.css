@@ -1,0 +1,39 @@
+
+.date {
+    /* height: 40px; */
+    /* padding-top: 8px; */
+    background-color: #77480e;
+    color: #f4e9dc;
+    /* padding-bottom: 50px;
+    padding-left: 10px;
+    padding-right: 10px; */
+    
+
+}
+
+#date-text {
+    /* background-color: aquamarine; */
+    text-align: center;
+}
+
+.item {
+    font-size: 1.3vw;
+}
+
+.items {
+    height: 45px;
+}
+
+#quantity {
+    width: 10%;
+    background-color: #f4e9dc;
+    border: none;
+    text-align: center;
+}
+
+.col-1 {
+    padding-right: 40px;
+}
+
+
+

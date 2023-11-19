@@ -1,45 +1,82 @@
-// CONNECT FRONT END TO BACK END USING APOLLO CLIENT
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// COMPONENTS
+import {
+  ApolloProvider,
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+} from "@apollo/client";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { setContext } from "@apollo/client/link/context";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-// PAGES
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Menu from "./pages/Menu";
-import Checkout from "./pages/Checkout";
-import OrderHistory from "./pages/OrderHistory";
 import NoMatch from "./pages/NoMatch";
+import Profile from "./pages/Profile";
+import Signup from "./pages/Signup";
+import SocialButtons from "./components/Social-buttons";
+import MenuBrunch from "./pages/MenuBrunch";
+import MenuDinner from "./pages/MenuDinner";
+import Success from "./pages/Success";
+import Detail from "./pages/Detail";
+import { StoreProvider } from "./utils/GlobalState";
+import OrderHistory from "./pages/OrderHistory";
+import Checkout from "./pages/Checkout";
+import Admin from "./pages/Admin";
+import Auth from "./utils/auth";
+import Cart from "./components/Cart";
+
+const httpLink = createHttpLink({
+  uri: "http://localhost:27017/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem("id_token");
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
 
 const client = new ApolloClient({
-  uri: "/graphql",
+  link: httpLink,
   cache: new InMemoryCache(),
 });
-// everything between the JSX Apollo Provider tags will eventually have access to the server's API data through the client we set up
+
 function App() {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={client} id="content">
       <Router>
         <div className="flex-column justify-flex-start min-100-vh">
-          <Header />
-          <div className="container">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/orderhistory" element={<OrderHistory />} />
-              <Route path="*" element={<NoMatch />} />
-            </Routes>
-          </div>
-          <Footer />
+          <StoreProvider>
+            <Header />
+            <SocialButtons />
+            <div>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                {/* <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} /> */}
+                {/* <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/:username?" component={<Profile />} /> */}
+                <Route path="/menu" element={<MenuBrunch />} />
+                {/* <Route path="/menu/dinner" element={<MenuDinner />} /> */}
+                {/* <Route path="/orderHistory" element={<OrderHistory />} />
+                <Route path="/products/:id" element={<Detail />} />
+                <Route path="/success" element={<Success />} />
+                <Route path="/checkout" element={<Checkout />} /> */}
+
+                <Route element={<NoMatch />} />
+              </Routes>
+            </div>
+          </StoreProvider>
         </div>
+        <Footer />
       </Router>
     </ApolloProvider>
   );
 }
+
 export default App;

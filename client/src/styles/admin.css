@@ -1,0 +1,25 @@
+
+.table {
+    text-align: center;
+}
+ 
+.admin-nav {
+    background-color:#77480e; 
+    position: relative;
+   
+}
+.admin-nav li a {
+    color: #e8b16d !important;
+}
+.admin-nav li a:hover {
+    color: #77480e !important;
+}
+
+#item-image {
+    height:17vh;
+}
+#description {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 0.9em;
+}
+

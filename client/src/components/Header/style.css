@@ -1,0 +1,36 @@
+#navbarDropdown {
+    color: var(--dark);
+	/* background-color: #5f3d13; */
+    font-size: 2.2vw !important;
+}
+
+.dropdown-menu {
+    background-color: #fffaf4; 
+    color: var(--dark);
+    text-align: center;
+    /* margin: 4vw; */
+}
+
+#navbarDropdown {
+    font-size: 2vw;
+    padding:0.5vw;
+}
+#nav-text {
+    font-size: 2vw !important;
+    padding:0.5vw;
+}
+.nav-item:hover {
+	color: var(--secondary);
+	background-color: var(--quatrinary);
+}
+
+#dropdown-text{
+    font-size: 1.5vw;
+}
+.navbar-toggler{
+ 
+}
+.navbar-toggler-icon {
+    height:2vw;
+    width: 2vw;
+}

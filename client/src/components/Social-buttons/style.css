@@ -1,0 +1,37 @@
+/* SOCIAL MEDIA LINKS */
+
+.social-buttons {
+    border:0;
+    margin:0;
+	position: fixed;
+	width: 4vw;
+    top: 25vh;
+	transition: all 0.3s linear;
+	box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.4);
+	background-color: #e8b16d8d;
+	padding-top:0.7vw;
+	padding-bottom:0.9vw;
+    z-index: 1000;
+}
+
+#tiktok-btn {
+	fill: #512b00;
+    height: 1.6vw;
+}
+
+.social-buttons ul {
+	padding:0vw 0vw 0vw 0vw ;
+    margin:0vw 0vw 0vw 1vw ;
+    border:0;
+}
+
+.social-buttons li {
+	list-style: none;
+	text-decoration: none;
+	text-align: center;
+    height: 2vw;
+}
+
+@media screen and (max-width: 1024px) {
+   
+}

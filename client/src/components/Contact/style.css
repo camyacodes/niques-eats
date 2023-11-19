@@ -1,0 +1,136 @@
+
+/* CONTACT SECTION */
+#contact {
+	background-color: #703c00;
+	color: var(--tertiary);
+
+}
+ .align-middle li {
+font-size: 2vw;
+ }
+
+#contact ul {
+	font-size: 1rem;
+	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+		"Lucida Sans", Arial, sans-serif;
+	color: var(--tertiary);
+}
+
+#email {
+	text-decoration: none;
+}
+
+#map-description {
+	font-size: 1rem;
+	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+		"Lucida Sans", Arial, sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+#contact {
+		padding:0;
+		position: relative;
+	}
+#contact-info{
+	text-align: center;
+	white-space: nowrap; 
+	
+}
+.align-middle {
+	position:absolute;
+	top: 30%;
+	left:10%;
+	
+}
+.align-middle li{
+	font-size: 3vw;
+}
+
+
+}
+
+@media screen and (max-width: 681px) {
+	#contact {
+			padding:0;
+			position: relative;
+			height:100vw;
+		}
+	#contact-info{
+		text-align: center;
+		white-space: nowrap; 
+		
+	}
+	.align-middle {
+		position:absolute;
+		top: 10%;
+		left:25%;
+		
+	}
+	.align-middle li{
+		font-size: 3vw;
+	}
+	#map {
+		position: absolute;
+		top:40vw;
+		left:25%;
+	}
+	}
+
+@media screen and (max-width: 577px) {
+	#contact {		
+			height:120vw;
+		}
+	#map {	
+		top:57vw;
+	}
+	}
+@media screen and (max-width: 577px) {
+	#map {	
+		top:50vw;
+	}
+	}
+@media screen and (max-width: 467px) {
+	#contact {		
+		height:150vw;
+	}
+	.align-middle {
+		position:absolute;
+		top: 10%;
+		left:20%;
+	}
+	.align-middle li{
+		font-size: 3vw;
+		line-height: 2vh;
+	}
+
+	#map {	
+		top:63vw;
+		left:20%;
+	}
+	}
+
+@media screen and (max-width: 408px) {
+	#map {	
+		padding:0;
+		margin:0;
+		border:0;
+	}
+	}
+	@media screen and (max-width: 388px) {
+		#contact {
+			padding:0;		
+			height:140vw;
+		}
+		.align-middle{
+			left:10%;
+		}
+		.align-middle li {
+			font-size: 4vw;
+			padding:0;
+			margin:0;
+			border:0;
+			 }
+		#map {	
+			left:8%;
+		}
+		}
