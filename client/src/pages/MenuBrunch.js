@@ -1,6 +1,6 @@
 import { React } from "react";
 import { QUERY_PRODUCTS } from "../utils/queries";
-
+import { Link } from "react-router-dom";
 import {
   Card,
   CardImg,
@@ -39,9 +39,9 @@ const MenuBrunch = () => {
             <h3 id="active-tab">BRUNCH</h3>
           </Col>
           <Col sm="6">
-            <a href="/menu/dinner">
+            <Link to="/menu/dinner">
               <h3 id="not-active-tab">DINNER</h3>
-            </a>
+            </Link>
           </Col>
         </Row>
       </div>

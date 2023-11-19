@@ -1,65 +1,61 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 import {
-  Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button, Col, Row,
-} from 'reactstrap';
-import "../styles/menus.css"
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button,
+  Col,
+  Row,
+} from "reactstrap";
+import "../styles/menus.css";
 
 import ProductList from "../components/ProductList";
 import CategoryMenuDinner from "../components/CategoryMenuDinner";
-import Cart from '../components/Cart';
-import DinnerDishes from '../components/DinnerDishes'
-
+import Cart from "../components/Cart";
+import DinnerDishes from "../components/DinnerDishes";
 
 const MenuDinner = () => {
-
-
   return (
     <div id="dinner-menu">
-  <Cart />
+      <Cart />
       <div id="title">
-        <span >MENU </span>
+        <span>MENU </span>
       </div>
-
 
       <div id="menu-tabs">
         <Row>
           <Col sm="6">
-            <a href="/menu"> <h3 id='not-active-tab'>
-              BRUNCH
-            </h3></a>
+            <Link to="/menu">
+              <h3 id="not-active-tab">BRUNCH</h3>
+            </Link>
           </Col>
           <Col sm="6">
-            <a href="/menu/dinner"><h3 id="active-tab">
-              DINNER
-            </h3></a>
+            <h3 id="active-tab">DINNER</h3>
           </Col>
         </Row>
       </div>
 
-
-
-
       <div id="dinner-background">
         <div id="dinner">
-
           <div id="nav-buttons-container" className="container">
-          <CategoryMenuDinner  />
+            <CategoryMenuDinner />
           </div>
 
           <div id="dinner-dishes">
-          {/* <ProductList /> */}
-          <DinnerDishes />
+            {/* <ProductList /> */}
+            <DinnerDishes />
           </div>
         </div>
-      
+
         {/* <div id="scroll-to-top" className ="footer">
   <a href="#title"> <h4>Scroll To Top ^</h4> </a>
   </div> */}
-    </div>
       </div>
-     
-
+    </div>
   );
 };
 

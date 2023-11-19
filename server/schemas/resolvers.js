@@ -1,5 +1,12 @@
 const mongoose = require("mongoose");
-const { User, Product, Category, Order } = require("../models");
+const {
+  User,
+  Product,
+  Category,
+  Order,
+  DishType,
+  ServingTime,
+} = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
@@ -16,8 +23,12 @@ const resolvers = {
               path: "products",
               model: "Product",
               populate: {
-                path: "category",
-                model: "Category",
+                path: "dishTypes",
+                model: "DishType",
+              },
+              populate: {
+                path: "servingTimes",
+                model: "ServingTime",
               },
             },
           })
@@ -37,22 +48,52 @@ const resolvers = {
             path: "products",
             model: "Product",
             populate: {
-              path: "category",
-              model: "Category",
+              path: "dishTypes",
+              model: "DishType",
+            },
+            populate: {
+              path: "servingTimes",
+              model: "ServingTime",
             },
           },
         })
         .select("-__v -password");
     },
     // find PRODUCTS by category ex: Brunch Sides, Dinner Drinks, etc or just all products
-    products: async (parent, category) => {
+    products: async (parent, { dishType, servingTime }) => {
       const params = {};
-      params.category = category ? category : {};
-      return Product.find(params.category).populate("category");
+
+      if (dishType) {
+        params.dishType = dishType;
+      }
+
+      if (servingTime) {
+        params.servingTime = servingTime;
+      }
+
+      try {
+        const products = await Product.find(params)
+          .populate({
+            path: "dishType",
+            model: "DishType",
+          })
+          .populate({
+            path: "servingTime",
+            model: "ServingTime",
+          });
+
+        return products;
+      } catch (error) {
+        console.error(error);
+        throw new Error("Failed to fetch products");
+      }
     },
     // Find all CATEGORIES
-    categories: async () => {
-      return Category.find();
+    dishTypes: async () => {
+      return DishType.find();
+    },
+    servingTimes: async () => {
+      return ServingTime.find();
     },
     // Find ORDERS by specific user or just all orders
     orders: async (parent, username) => {
@@ -61,8 +102,12 @@ const resolvers = {
         path: "products",
         model: "Product",
         populate: {
-          path: "category",
-          model: "Category",
+          path: "dishTypes",
+          model: "DishType",
+        },
+        populate: {
+          path: "servingtimes",
+          model: "ServingTime",
         },
       });
     },

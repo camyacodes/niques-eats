@@ -1,5 +1,7 @@
 const { Schema, model } = require("mongoose");
 const categorySchema = require("./Category");
+const dishTypeSchema = require("./DishType");
+const servingTimeSchema = require("./ServingTime");
 
 const productSchema = new Schema({
   name: {
@@ -18,9 +20,13 @@ const productSchema = new Schema({
     required: true,
     min: 0.99,
   },
-  category: {
+  dishType: {
     type: Schema.Types.ObjectId,
-    ref: "Category",
+    ref: "DishType",
+  },
+  servingTime: {
+    type: Schema.Types.ObjectId,
+    ref: "ServingTime",
   },
 });
 

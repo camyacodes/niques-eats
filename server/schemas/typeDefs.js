@@ -10,10 +10,13 @@ const typeDefs = gql`
     orders: [Order]
   }
 
-  type Category {
+  type DishType {
     _id: ID
-    dishType: String
-    servingTime: String
+    name: String
+  }
+  type ServingTime {
+    _id: ID
+    name: String
   }
 
   type Product {
@@ -22,7 +25,8 @@ const typeDefs = gql`
     description: String
     image: String
     price: Float
-    category: Category
+    dishType: DishType
+    servingTime: ServingTime
   }
 
   type Order {
@@ -42,8 +46,9 @@ const typeDefs = gql`
   }
 
   type Query {
-    products(category: ID): [Product]
-    categories: [Category]
+    products(dishType: String, servingTime: String): [Product]
+    dishTypes(name: String): [DishType]
+    servingTimes(name: String): [ServingTime]
     orders(username: String): [Order]
     users(username: String): [User]
     loggedInUser: User
