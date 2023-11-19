@@ -2,16 +2,14 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
-// import { QUERY_ORDERS } from "../utils/queries";
+import { QUERY_LOGGEDINUSER } from "../utils/queries";
 import "../styles/orderHistory.css";
 import Cart from "../components/Cart";
 
 function OrderHistory() {
   // const [orders, setOrders] = useState([])
 
-  // const { loading, data } = useQuery(QUERY_ORDERS);
-
-  const data = 1;
+  const { loading, data } = useQuery(QUERY_LOGGEDINUSER);
 
   const orders = data?.orders || [];
 

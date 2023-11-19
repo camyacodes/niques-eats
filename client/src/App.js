@@ -67,10 +67,10 @@ function App() {
                 <Route path="/profile/:username?" component={<Profile />} /> */}
                 <Route path="/menu" element={<MenuBrunch />} />
                 {/* <Route path="/menu/dinner" element={<MenuDinner />} /> */}
-                {/* <Route path="/orderHistory" element={<OrderHistory />} />
+                <Route path="/orderHistory" element={<OrderHistory />} />
                 <Route path="/products/:id" element={<Detail />} />
                 <Route path="/success" element={<Success />} />
-                <Route path="/checkout" element={<Checkout />} /> */}
+                <Route path="/checkout" element={<Checkout />} />
 
                 <Route element={<NoMatch />} />
               </Routes>
