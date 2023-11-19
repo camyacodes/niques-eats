@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import "../checkout-info/style.css";
 import { useStoreContext } from "../../utils/GlobalState";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
+import { QUERY_LOGGEDINUSER } from "../../utils/queries";
 import { ADD_ORDER } from "../../utils/mutations";
 import { ADD_MULTIPLE_TO_CART, CLEAR_CART } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
@@ -14,11 +15,12 @@ import { useState } from "react";
 // const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 export default function CheckoutInfo() {
-  const flState = "Florida";
-
-  const flCity = "Orlando";
+  const { data } = useQuery(QUERY_LOGGEDINUSER);
   const [addOrder] = useMutation(ADD_ORDER);
-  const loading = 1;
+
+  const flState = "Florida";
+  const flCity = "Orlando";
+  const loading = [];
   // const [getCheckout, { loading, data }] = useLazyQuery(QUERY_CHECKOUT);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -40,16 +42,16 @@ export default function CheckoutInfo() {
     });
   }
 
-  useEffect(() => {
-    async function getCart() {
-      const cart = await idbPromise("cart", "get");
-      dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
-    }
+  // useEffect(() => {
+  //   async function getCart() {
+  //     const cart = await idbPromise("cart", "get");
+  //     dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
+  //   }
 
-    if (!state.cart.length) {
-      getCart();
-    }
-  }, [state.cart.length, dispatch, state.cart]);
+  //   if (!state.cart.length) {
+  //     getCart();
+  //   }
+  // }, [state.cart.length, dispatch, state.cart]);
 
   // console.log(state.cart)
   function calculateTotal() {
@@ -60,9 +62,18 @@ export default function CheckoutInfo() {
     return sum.toFixed(2);
   }
 
-  console.log(state.cart);
+  // console.log(state.cart);
 
-  const submitCheckout = async () => {
+  const submitCheckout = async (event) => {
+    event.preventDefault();
+    setFormData("");
+    // try {
+    //   await addOrder({
+    //     variables: { username: data.loggedInUser.username },
+    //   });
+    // } catch (e) {
+    //   console.error(e);
+    // }
     // console.log({
     // 	form: {
     // 		...formData,
@@ -71,36 +82,27 @@ export default function CheckoutInfo() {
     // 	},
     // 	products: state.cart,
     // });
-
-    const productIds = [];
-
-    state.cart.forEach((item) => {
-      for (let i = 0; i < item.purchaseQuantity; i++) {
-        productIds.push(item._id);
-      }
-    });
-
-    const order = {
-      ...formData,
-      products: productIds,
-      total: calculateTotal(),
-    };
+    // const productIds = [];
+    // state.cart.forEach((item) => {
+    //   for (let i = 0; i < item.purchaseQuantity; i++) {
+    //     productIds.push(item._id);
+    //   }
+    // });
+    // const order = {
+    //   ...formData,
+    //   total: calculateTotal(),
+    // };
     // console.log(order)
-
-    const { data } = await addOrder({
-      variables: { ...order },
-    });
-
-    dispatch({
-      type: CLEAR_CART,
-    });
-
-    idbPromise("cart", "clear");
-
+    // const { data } = await addOrder({
+    //   variables: { ...order },
+    // });
+    // dispatch({
+    //   type: CLEAR_CART,
+    // });
+    // idbPromise("cart", "clear");
     // getCheckout({
     // 	variables: { products: productIds },
     // });
-
     // window.location.assign("/success");
   };
 
@@ -269,18 +271,16 @@ export default function CheckoutInfo() {
           </div>
           <div className="row mt-5">
             <div className="col d-flex justify-content-center">
-              {loading ? (
-                <img src={spinner} alt="loading" id="spinner" />
-              ) : null}
-              <a href="/success">
-                <button
-                  type="button"
-                  className="cont-btn"
-                  onClick={submitCheckout}
-                >
-                  PLACE ORDER
-                </button>
-              </a>
+              {loading ? <img alt="loading" id="spinner" /> : null}
+              {/* <a href="/success"> */}
+              <button
+                type="button"
+                className="cont-btn"
+                onClick={submitCheckout}
+              >
+                PLACE ORDER
+              </button>
+              {/* </a> */}
             </div>
           </div>
         </div>
