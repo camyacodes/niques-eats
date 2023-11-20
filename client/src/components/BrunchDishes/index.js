@@ -5,7 +5,11 @@ import { QUERY_PRODUCTS } from "../../utils/queries";
 import { QUERY_SERVINGTIMES } from "../../utils/queries";
 import spinner from "../../assets/spinner.gif";
 import { useStoreContext } from "../../utils/GlobalState";
-import { UPDATE_PRODUCTS } from "../../utils/actions";
+import {
+  UPDATE_PRODUCTS,
+  UPDATE_SERVINGTIMES,
+  UPDATE_CURRENT_SERVINGTIME,
+} from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 import { useProductReducer } from "../../utils/reducers";
 import { Row, Container, Col } from "reactstrap";
@@ -13,9 +17,10 @@ import { Row, Container, Col } from "reactstrap";
 const ProductList = () => {
   const [state, dispatch] = useStoreContext();
 
-  const { currentDishType } = state;
+  const { servingTimes, currentDishType, currentServingTime } = state;
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
+  const { data: servingTimeData } = useQuery(QUERY_SERVINGTIMES);
 
   useEffect(() => {
     if (data) {
@@ -26,13 +31,38 @@ const ProductList = () => {
     }
   }, [data, dispatch]);
 
+  useEffect(() => {
+    if (servingTimeData) {
+      dispatch({
+        type: UPDATE_SERVINGTIMES,
+        servingTimes: servingTimeData.servingTimes,
+      });
+
+      // Find the "Brunch" serving time and set it as the default
+      const brunchServingTime = servingTimeData.servingTimes.find(
+        (item) => item.name === "Brunch"
+      );
+
+      if (brunchServingTime) {
+        dispatch({
+          type: UPDATE_CURRENT_SERVINGTIME,
+          currentServingTime: brunchServingTime._id,
+        });
+      }
+    }
+  }, [servingTimeData, dispatch]);
+
   function filterProducts() {
     if (!currentDishType) {
-      return state.products;
+      return state.products.filter(
+        (product) => product.servingTime._id === currentServingTime
+      );
     }
 
     return state.products.filter(
-      (product) => product.dishType._id === currentDishType
+      (product) =>
+        product.servingTime._id === currentServingTime &&
+        product.dishType._id === currentDishType
     );
   }
 
