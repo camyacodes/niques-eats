@@ -1,5 +1,11 @@
-import { React } from "react";
+import React, { useEffect } from "react";
+import { useStoreContext } from "../utils/GlobalState";
 import { QUERY_PRODUCTS } from "../utils/queries";
+import { QUERY_SERVINGTIMES } from "../utils/queries";
+import {
+  UPDATE_SERVINGTIMES,
+  UPDATE_CURRENT_SERVINGTIME,
+} from "../utils/actions";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -22,8 +28,26 @@ import BrunchDishes from "../components/BrunchDishes";
 import { useQuery } from "@apollo/client";
 
 const MenuBrunch = () => {
-  const { loading, data } = useQuery(QUERY_PRODUCTS);
-  const products = data?.products || [];
+  const [state, dispatch] = useStoreContext();
+  const { servingTimes } = state;
+  const { data: servingTimeData } = useQuery(QUERY_SERVINGTIMES);
+  // const { loading, data } = useQuery(QUERY_PRODUCTS);
+  // const products = data?.products || [];
+  useEffect(() => {
+    if (servingTimeData) {
+      dispatch({
+        type: UPDATE_SERVINGTIMES,
+        servingTimes: servingTimeData.servingTimes,
+      });
+    }
+  }, [servingTimeData, dispatch]);
+
+  const handleClick = (id) => {
+    dispatch({
+      type: UPDATE_CURRENT_SERVINGTIME,
+      currentServingTime: id,
+    });
+  };
 
   return (
     <div>
@@ -35,14 +59,28 @@ const MenuBrunch = () => {
 
       <div id="menu-tabs">
         <Row>
-          <Col sm="6">
+          {servingTimes.map((item) => (
+            <Col sm="6">
+              <h3
+                id="active-tab"
+                key={item._id}
+                onClick={() => {
+                  handleClick(item._id);
+                }}
+              >
+                {item.name}
+              </h3>
+            </Col>
+          ))}
+
+          {/* <Col sm="6">
             <h3 id="active-tab">BRUNCH</h3>
           </Col>
           <Col sm="6">
             <Link to="/menu/dinner">
               <h3 id="not-active-tab">DINNER</h3>
             </Link>
-          </Col>
+          </Col> */}
         </Row>
       </div>
 
