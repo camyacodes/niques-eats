@@ -6,6 +6,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { StoreProvider } from "./utils/GlobalState";
 import { setContext } from "@apollo/client/link/context";
 
 import Header from "./components/Header";
@@ -20,7 +21,6 @@ import MenuBrunch from "./pages/MenuBrunch";
 import MenuDinner from "./pages/MenuDinner";
 import Success from "./pages/Success";
 import Detail from "./pages/Detail";
-import { StoreProvider } from "./utils/GlobalState";
 import OrderHistory from "./pages/OrderHistory";
 import Checkout from "./pages/Checkout";
 import Admin from "./pages/Admin";

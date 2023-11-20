@@ -1,13 +1,30 @@
 import React, { useEffect } from "react";
+
 import { useQuery } from "@apollo/client";
-// import { QUERY_CATEGORIES } from "../../utils/queries";
+import { QUERY_DISHTYPES } from "../../utils/queries";
 import { useStoreContext } from "../../utils/GlobalState";
-// import { UPDATE_CATEGORIES, UPDATE_CURRENT_CATEGORY } from '../../utils/actions';
+import { UPDATE_DISHTYPES, UPDATE_CURRENT_DISHTYPE } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
-import { Col, Row } from "reactstrap";
+import { Col, Row, Container } from "reactstrap";
 import "./style.css";
 
 function CategoryMenuBrunch() {
+  const [state, dispatch] = useStoreContext();
+
+  const { dishTypes } = state;
+
+  const { data: dishTypeData } = useQuery(QUERY_DISHTYPES);
+
+  useEffect(() => {
+    if (dishTypeData) {
+      dispatch({
+        type: UPDATE_DISHTYPES,
+        dishTypes: dishTypeData.dishTypes,
+      });
+    }
+  }, [dishTypeData, dispatch]);
+
+  // return <div>Hi</div>;
   // const [state, dispatch] = useStoreContext();
   // const { categories } = state;
   // const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
@@ -31,36 +48,31 @@ function CategoryMenuBrunch() {
   //     });
   //   }
   // }, [categoryData, dispatch, loading]);
-  // const handleClick = (id) => {
-  //   dispatch({
-  //     type: UPDATE_CURRENT_CATEGORY,
-  //     currentCategory: id,
-  //   });
-  // };
-  // return (
-  //   <Row id="nav-buttons-row">
-  //     <Col>
-  //       {categories.map(
-  //         (item) =>
-  //           // below is the way to ask the app to ignore these item in category list
-  //           item.name === "Main Dishes - Dinner" ||
-  //           item.name === "Sides - Dinner" ||
-  //           item.name === "Dessert - Dinner" ||
-  //           item.name === "Drinks - Dinner" || (
-  //             <button
-  //               className="menu-nav-buttons"
-  //               key={item._id}
-  //               // onClick={() => {
-  //               //   handleClick(item._id);
-  //               // }}
-  //             >
-  //               {item.name}
-  //             </button>
-  //           )
-  //       )}
-  //     </Col>
-  //   </Row>
-  // );
+  const handleClick = (id) => {
+    dispatch({
+      type: UPDATE_CURRENT_DISHTYPE,
+      currentDishType: id,
+    });
+  };
+  return (
+    <Container>
+      <Row>
+        <Col>
+          {dishTypes.map((item) => (
+            <button
+              className="menu-nav-buttons"
+              key={item._id}
+              onClick={() => {
+                handleClick(item._id);
+              }}
+            >
+              {item.name + "s"}
+            </button>
+          ))}
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
 export default CategoryMenuBrunch;

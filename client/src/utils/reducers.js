@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer } from "react";
 import {
   UPDATE_PRODUCTS,
   UPDATE_CATEGORIES,
@@ -8,8 +8,12 @@ import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
   CLEAR_CART,
-  TOGGLE_CART
-} from './actions';
+  TOGGLE_CART,
+  UPDATE_DISHTYPES,
+  UPDATE_CURRENT_DISHTYPE,
+  UPDATE_SERVINGTIMES,
+  UPDATE_CURRENT_SERVINGTIME,
+} from "./actions";
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -17,25 +21,47 @@ export const reducer = (state, action) => {
     case UPDATE_PRODUCTS:
       return {
         ...state,
-        products: [...action.products]
+        products: [...action.products],
       };
     // if action type value is the value of `UPDATE_CATEGORIES`, return a new state object with an updated categories array
     case UPDATE_CATEGORIES:
       return {
         ...state,
-        categories: [...action.categories]
+        categories: [...action.categories],
       };
 
     case UPDATE_CURRENT_CATEGORY:
       return {
         ...state,
-        currentCategory: action.currentCategory
+        currentCategory: action.currentCategory,
+      };
+    case UPDATE_DISHTYPES:
+      return {
+        ...state,
+        dishTypes: [...action.dishTypes],
+      };
+
+    case UPDATE_CURRENT_DISHTYPE:
+      return {
+        ...state,
+        currentDishType: action.currentDishType,
+      };
+    case UPDATE_SERVINGTIMES:
+      return {
+        ...state,
+        servingTimes: [...action.servingTimes],
+      };
+
+    case UPDATE_CURRENT_SERVINGTIME:
+      return {
+        ...state,
+        currentServingTime: action.currentServingTime,
       };
     case ADD_TO_CART:
       return {
         ...state,
         cartOpen: true,
-        cart: [...state.cart, action.product]
+        cart: [...state.cart, action.product],
       };
     case ADD_MULTIPLE_TO_CART:
       return {
@@ -43,46 +69,45 @@ export const reducer = (state, action) => {
         cart: [...state.cart, ...action.products],
       };
     case REMOVE_FROM_CART:
-      let newState = state.cart.filter(product => {
+      let newState = state.cart.filter((product) => {
         return product._id !== action._id;
       });
 
       return {
         ...state,
         cartOpen: newState.length > 0,
-        cart: newState
+        cart: newState,
       };
     case UPDATE_CART_QUANTITY:
       return {
         ...state,
         cartOpen: true,
-        cart: state.cart.map(product => {
+        cart: state.cart.map((product) => {
           if (action._id === product._id) {
             product.purchaseQuantity = action.purchaseQuantity;
           }
           return product;
-        })
+        }),
       };
 
     case CLEAR_CART:
       return {
         ...state,
         cartOpen: false,
-        cart: []
+        cart: [],
       };
 
     case TOGGLE_CART:
       return {
         ...state,
-        cartOpen: !state.cartOpen
+        cartOpen: !state.cartOpen,
       };
-    
+
     // case ADD_CART_DATE:
     //   return {
     //     ...state,
     //     cartDate: state.date = null
     // }
-      
 
     default:
       return state;

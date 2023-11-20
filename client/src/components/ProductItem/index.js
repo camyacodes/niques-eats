@@ -17,8 +17,8 @@ import "react-datetime/css/react-datetime.css";
 import Datetime from "react-datetime";
 import moment from "moment";
 
-function ProductItem({ products }) {
-  // const { image, name, _id, price, description } = item;
+function ProductItem(item) {
+  const { image, name, _id, price, description } = item;
 
   // const [state, dispatch] = useStoreContext();
   // const [deliveryDate, setDeliveryDate] = useState(null);
@@ -69,58 +69,48 @@ function ProductItem({ products }) {
   // 	const end = moment().add(10, "days");
   // 	return moment(current).isBetween(start, end);
   // };
-  // if (!products.length) {
+  // if (!length) {
   //   return <h3>Check back later for our update menu!</h3>;
   // }
   return (
     <Row>
-      {products &&
-        products.map((products) => (
-          <Container
-            className="themed-container"
-            fluid={true}
-            id="dish-card"
-            key={products._id}
-          >
-            <Col key={products._id}>
-              <Card id="dish-card-content">
-                <div>
-                  <CardImg
-                    top
-                    width="100%"
-                    src={`/images/${products.image}`}
-                    alt={products.name}
-                    id="dish-img"
-                    className="rounded mx-auto d-block"
-                  />
-                </div>
+      <Container
+        className="themed-container"
+        fluid={true}
+        id="dish-card"
+        key={_id}
+      >
+        <Col key={_id}>
+          <Card id="dish-card-content">
+            <div>
+              <CardImg
+                top
+                width="100%"
+                src={`/images/${image}`}
+                alt={name}
+                id="dish-img"
+                className="rounded mx-auto d-block"
+              />
+            </div>
 
-                <CardBody>
-                  <div className="row">
-                    <CardTitle tag="h5" className="col " id="card-text">
-                      {products.name}
-                    </CardTitle>
-                    <CardSubtitle
-                      tag="h5"
-                      className="col text-end"
-                      id="card-text"
-                    >
-                      ${products.price}
-                    </CardSubtitle>
-                  </div>
-                  <div id="card-btn">
-                    <button
-                      type="button"
-                      className="btn btn-primary add-to-cart"
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-          </Container>
-        ))}
+            <CardBody>
+              <div className="row">
+                <CardTitle tag="h5" className="col " id="card-text">
+                  {name}
+                </CardTitle>
+                <CardSubtitle tag="h5" className="col text-end" id="card-text">
+                  ${price}
+                </CardSubtitle>
+              </div>
+              <div id="card-btn">
+                <button type="button" className="btn btn-primary add-to-cart">
+                  Add to Cart
+                </button>
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+      </Container>
     </Row>
   );
 }

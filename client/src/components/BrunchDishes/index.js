@@ -8,16 +8,64 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_PRODUCTS } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 import { useProductReducer } from "../../utils/reducers";
-import { Row } from "reactstrap";
+import { Row, Container, Col } from "reactstrap";
 
 const ProductList = () => {
   const [state, dispatch] = useStoreContext();
 
-  const { currentCategory } = state;
+  const { currentDishType } = state;
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-  const products = data?.products || [];
+  useEffect(() => {
+    if (data) {
+      dispatch({
+        type: UPDATE_PRODUCTS,
+        products: data.products,
+      });
+    }
+  }, [data, dispatch]);
+
+  function filterProducts() {
+    if (!currentDishType) {
+      return state.products;
+    }
+
+    return state.products.filter(
+      (product) => product.dishType._id === currentDishType
+    );
+  }
+
+  return (
+    <Container>
+      {state.products.length ? (
+        <Row md="3" sm="2" xs="2">
+          {filterProducts().map((product) => (
+            <Col>
+              <ProductItem
+                key={product._id}
+                _id={product._id}
+                image={product.image}
+                name={product.name}
+                price={product.price}
+                description={product.description}
+              />
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        <h3>Check back later for our update menu!</h3>
+      )}
+      {loading ? <div>Loading...</div> : null}
+    </Container>
+  );
+  // const [state, dispatch] = useStoreContext();
+
+  // const { currentCategory } = state;
+
+  // const { loading, data } = useQuery(QUERY_PRODUCTS);
+
+  // const products = data?.products || [];
 
   //   useEffect(() => {
   //     if (data) {
@@ -53,16 +101,16 @@ const ProductList = () => {
   //     //   (products) => products.category._id === currentCategory
   //     // );
   //   }
-  if (!products.length) {
-    return <h3>Check back later for our update menu!</h3>;
-  }
-  return (
-    <div>
-      <Row>
-        {loading ? <div>Loading...</div> : <ProductItem products={products} />}
-      </Row>
-    </div>
-  );
+  // if (!products.length) {
+  //   return <h3>Check back later for our update menu!</h3>;
+  // }
+  // return (
+  //   <div>
+  //     <Row>
+  //       {loading ? <div>Loading...</div> : <ProductItem products={products} />}
+  //     </Row>
+  //   </div>
+  // );
 };
 
 export default ProductList;
