@@ -15,12 +15,12 @@ import { useState } from "react";
 // const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 export default function CheckoutInfo() {
-  const { data } = useQuery(QUERY_LOGGEDINUSER);
-  const [addOrder] = useMutation(ADD_ORDER);
+  const { loading, data: loginData } = useQuery(QUERY_LOGGEDINUSER);
+  const [addOrder, { error }] = useMutation(ADD_ORDER);
 
   const flState = "Florida";
   const flCity = "Orlando";
-  const loading = [];
+
   // const [getCheckout, { loading, data }] = useLazyQuery(QUERY_CHECKOUT);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -66,44 +66,24 @@ export default function CheckoutInfo() {
 
   const submitCheckout = async (event) => {
     event.preventDefault();
-    setFormData("");
-    // try {
-    //   await addOrder({
-    //     variables: { username: data.loggedInUser.username },
-    //   });
-    // } catch (e) {
-    //   console.error(e);
-    // }
-    // console.log({
-    // 	form: {
-    // 		...formData,
-    // 		flCity,
-    // 		flState,
-    // 	},
-    // 	products: state.cart,
-    // });
-    // const productIds = [];
-    // state.cart.forEach((item) => {
-    //   for (let i = 0; i < item.purchaseQuantity; i++) {
-    //     productIds.push(item._id);
-    //   }
-    // });
-    // const order = {
-    //   ...formData,
-    //   total: calculateTotal(),
-    // };
-    // console.log(order)
-    // const { data } = await addOrder({
-    //   variables: { ...order },
-    // });
-    // dispatch({
-    //   type: CLEAR_CART,
-    // });
-    // idbPromise("cart", "clear");
-    // getCheckout({
-    // 	variables: { products: productIds },
-    // });
-    // window.location.assign("/success");
+
+    try {
+      await addOrder({
+        variables: {
+          ...formData,
+          username: loginData.loggedInUser.username,
+          total: calculateTotal(),
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+
+    dispatch({
+      type: CLEAR_CART,
+    });
+    idbPromise("cart", "clear");
+    window.location.assign("/success");
   };
 
   // useEffect(() => {

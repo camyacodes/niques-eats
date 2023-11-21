@@ -150,9 +150,9 @@ export const QUERY_LOGGEDINUSER = gql`
 // `;
 
 // export const QUERY_CHECKOUT = gql`
-//   query getCheckout($products: [ID]!) {
-//     checkout(products: $products) {
-//       session
-//     }
+// query getCheckout {
+//   checkout() {
+//     session
 //   }
+// }
 // `;

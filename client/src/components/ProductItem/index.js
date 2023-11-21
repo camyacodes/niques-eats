@@ -22,6 +22,13 @@ function ProductItem(item) {
 
   const [state, dispatch] = useStoreContext();
 
+  const [deliveryDate, setDeliveryDate] = useState();
+  function onDateChange(e) {
+    const deliveryDate = e["_d"];
+    setDeliveryDate(deliveryDate);
+    console.log(deliveryDate);
+  }
+
   const { cart } = state;
 
   const addToCart = () => {
@@ -31,20 +38,25 @@ function ProductItem(item) {
         type: UPDATE_CART_QUANTITY,
         _id: _id,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+        cartDate: deliveryDate,
       });
       idbPromise("cart", "put", {
         ...itemInCart,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+        cartDate: deliveryDate,
       });
     } else {
       dispatch({
         type: ADD_TO_CART,
         product: { ...item, purchaseQuantity: 1 },
       });
-      idbPromise("cart", "put", { ...item, purchaseQuantity: 1 });
+      idbPromise("cart", "put", {
+        ...item,
+        purchaseQuantity: 1,
+        cartDate: deliveryDate,
+      });
     }
   };
-  // const [deliveryDate, setDeliveryDate] = useState(null);
 
   // const { cart } = state;
 
@@ -76,25 +88,19 @@ function ProductItem(item) {
   // };
 
   // Calendar functions
-  // function onDateChange (e) {
-  //   setDeliveryDate(e.target.value)
-  //   console.log(deliverDate)
-  // }
 
   // function onDateChange(e) {
-  // 	const deliverDate = e["_d"];
+  //   const deliveryDate = e["_d"];
 
-  // 	setDeliveryDate(deliverDate);
+  //   setDeliveryDate(deliverDate);
   // }
 
-  // var valid = function (current) {
-  // 	const start = moment().add(3, "days");
-  // 	const end = moment().add(10, "days");
-  // 	return moment(current).isBetween(start, end);
-  // };
-  // if (!length) {
-  //   return <h3>Check back later for our update menu!</h3>;
-  // }
+  var valid = function (current) {
+    const start = moment().add(3, "days");
+    const end = moment().add(10, "days");
+    return moment(current).isBetween(start, end);
+  };
+
   return (
     <div>
       <Row>
@@ -136,7 +142,6 @@ function ProductItem(item) {
                     className="btn btn-primary add-to-cart"
                     data-bs-toggle="modal"
                     data-bs-target={`#modal${_id}`}
-                    // onClick={addToCart}
                   >
                     Add to Cart
                   </button>
@@ -191,8 +196,8 @@ function ProductItem(item) {
               <Datetime
                 value={"Choose a Date"}
                 timeFormat={false}
-                // isValidDate={valid}
-                // onChange={onDateChange}
+                isValidDate={valid}
+                onChange={onDateChange}
               />
               <button
                 type="button"
