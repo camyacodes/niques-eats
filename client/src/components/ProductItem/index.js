@@ -24,9 +24,9 @@ function ProductItem(item) {
 
   const [deliveryDate, setDeliveryDate] = useState();
   function onDateChange(e) {
-    const deliveryDate = e["_d"];
-    setDeliveryDate(deliveryDate);
-    console.log(deliveryDate);
+    const deliverDate = e["_d"];
+    setDeliveryDate(deliverDate);
+    console.log(deliverDate);
   }
 
   const { cart } = state;
@@ -38,22 +38,21 @@ function ProductItem(item) {
         type: UPDATE_CART_QUANTITY,
         _id: _id,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-        cartDate: deliveryDate,
       });
       idbPromise("cart", "put", {
         ...itemInCart,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-        cartDate: deliveryDate,
+        date: deliveryDate,
       });
     } else {
       dispatch({
         type: ADD_TO_CART,
-        product: { ...item, purchaseQuantity: 1 },
+        product: { ...item, purchaseQuantity: 1, date: deliveryDate },
       });
       idbPromise("cart", "put", {
         ...item,
         purchaseQuantity: 1,
-        cartDate: deliveryDate,
+        date: deliveryDate,
       });
     }
   };
