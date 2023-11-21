@@ -13,13 +13,17 @@ function CategoryMenuDinner({}) {
 
   const { dishTypes } = state;
 
-  const { data: dishTypeData } = useQuery(QUERY_DISHTYPES);
+  const { loading, data: dishTypeData } = useQuery(QUERY_DISHTYPES);
 
   useEffect(() => {
-    if (dishTypeData) {
+    if (dishTypeData && dishTypeData.dishTypes) {
       dispatch({
         type: UPDATE_DISHTYPES,
         dishTypes: dishTypeData.dishTypes,
+      });
+
+      dishTypeData.dishTypes.forEach((dishType) => {
+        idbPromise("dishTypes", "put", dishType);
       });
     }
   }, [dishTypeData, dispatch]);

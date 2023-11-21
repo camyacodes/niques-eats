@@ -13,16 +13,29 @@ function CategoryMenuBrunch() {
 
   const { dishTypes } = state;
 
-  const { data: dishTypeData } = useQuery(QUERY_DISHTYPES);
+  const { loading, data: dishTypeData } = useQuery(QUERY_DISHTYPES);
 
   useEffect(() => {
-    if (dishTypeData) {
+    if (dishTypeData && dishTypeData.dishTypes) {
       dispatch({
         type: UPDATE_DISHTYPES,
         dishTypes: dishTypeData.dishTypes,
       });
+
+      dishTypeData.dishTypes.forEach((dishType) => {
+        idbPromise("dishTypes", "put", dishType);
+      });
+    } else if (!loading) {
+      // since we're offline, get all of the data from the `dishTypes` store
+      idbPromise("dishTypes", "get").then((dishTypes) => {
+        // use retrieved data to set global state for offline browsing
+        dispatch({
+          type: UPDATE_DISHTYPES,
+          dishTypes: dishTypes,
+        });
+      });
     }
-  }, [dishTypeData, dispatch]);
+  }, [dishTypeData, loading, dispatch]);
 
   // return <div>Hi</div>;
   // const [state, dispatch] = useStoreContext();
