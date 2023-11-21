@@ -26,6 +26,15 @@
 	align-items: center;
 }
 
+#dinner {
+	/* background-color: #f4e9dce4;; */
+	/* padding: 2vw; */
+	border: 0px;
+	margin: 0;
+	padding: 1vw;
+	width:100%;
+	align-items: center;
+}
 
 #title {
 	font-size: 5vw;
