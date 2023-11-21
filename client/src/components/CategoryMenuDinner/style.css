@@ -4,7 +4,10 @@
 .menu-nav-buttons-dinner{
 	background-color: var(--tertiary);
 	/* text-align-last: center; */
-	margin: 2vw;
+	/* margin: 2vw; */
+	margin-left: 8vw;
+	justify-content: center;
+	justify-items: center;
 	font-size: 2.4vw;
 	border-radius: 7%;
 	border-width: 0vw;
@@ -16,7 +19,7 @@
 	/* text-align-last: center; */
 
 }
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
 	.menu-nav-buttons-dinner{
 		margin: 1.5vw;
 	}
@@ -67,7 +70,7 @@
 		border-width: 0.3vw;
 		top:0;
 	}
-}
+} */
 
 @media screen and (max-width: 375px) {
 	.menu-nav-buttons-dinner{

@@ -66,7 +66,7 @@ function App() {
                 {/* <Route path="/profile" element={<Profile />} />
                 <Route path="/profile/:username?" component={<Profile />} /> */}
                 <Route path="/menu" element={<MenuBrunch />} />
-                {/* <Route path="/menu/dinner" element={<MenuDinner />} /> */}
+                <Route path="/menu/dinner" element={<MenuDinner />} />
                 <Route path="/orderHistory" element={<OrderHistory />} />
                 <Route path="/products/:id" element={<Detail />} />
                 <Route path="/success" element={<Success />} />

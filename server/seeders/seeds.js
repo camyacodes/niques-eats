@@ -231,6 +231,35 @@ db.once("open", async () => {
       quantity: 10,
     },
 
+    // BRUNCH DESSERTS
+    {
+      name: "Orange Roll",
+      description: "Zesty citrus bliss in every bite.",
+      image: "orange-roll.jpg",
+      dishType: dishTypes[3]._id,
+      servingTime: servingTimes[0]._id,
+      price: 5,
+      quantity: 15,
+    },
+    {
+      name: "Coffee Cake",
+      description: "Rich, moist, cinnamon-spiced delight.",
+      image: "coffee-cake.jpg",
+      dishType: dishTypes[3]._id,
+      servingTime: servingTimes[0]._id,
+      price: 4,
+      quantity: 15,
+    },
+    {
+      name: "Blueberry Scone",
+      description: "Deliciously tender, bursting with blueberries.",
+      image: "blueberry-scone.jpg",
+      dishType: dishTypes[3]._id,
+      servingTime: servingTimes[0]._id,
+      price: 6,
+      quantity: 15,
+    },
+
     // DINNER Entree
     {
       name: "Gumbo",
