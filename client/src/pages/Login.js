@@ -33,42 +33,85 @@ function Login(props) {
   };
 
   return (
-    <div className="container my-1" id="login">
+    <main className="flex-row justify-center mb-4" id="signup">
       <Cart />
-      <Link to="/signup">← Go to Signup</Link>
+      <div className="col-12 col-md-6">
+        <div className="card">
+          <h4 className="card-header">Login</h4>
+          <div className="card-body">
+            <form onSubmit={handleFormSubmit}>
+              <input
+                className="form-input"
+                placeholder="Your email"
+                name="email"
+                type="email"
+                id="email"
+                value={formState.email}
+                onChange={handleChange}
+              />
+              <input
+                className="form-input"
+                placeholder="******"
+                name="password"
+                type="password"
+                id="pwd"
+                value={formState.password}
+                onChange={handleChange}
+              />
+              <button className="btn d-block w-100" type="submit">
+                Submit
+              </button>
+            </form>
 
-      <h2 id="title">Login</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email address:</label>
-          <input
-            placeholder="youremail@test.com"
-            name="email"
-            type="email"
-            id="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="******"
-            name="password"
-            type="password"
-            id="pwd"
-            onChange={handleChange}
-          />
-        </div>
-        {error ? (
-          <div>
-            <p className="error-text">The provided credentials are incorrect</p>
+            <Link to="/signup">Don't have an account? Signup</Link>
+
+            {error ? (
+              <div>
+                <p className="error-text">
+                  The provided credentials are incorrect
+                </p>
+              </div>
+            ) : null}
           </div>
-        ) : null}
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
         </div>
-      </form>
-    </div>
+      </div>
+    </main>
+    // <div className="container my-1" id="login">
+    //   <Cart />
+    //   <Link to="/signup">← Go to Signup</Link>
+
+    //   <h2 id="title">Login</h2>
+    //   <form onSubmit={handleFormSubmit}>
+    //     <div className="flex-row space-between my-2">
+    //       <label htmlFor="email">Email address:</label>
+    //       <input
+    //         placeholder="youremail@test.com"
+    //         name="email"
+    //         type="email"
+    //         id="email"
+    //         onChange={handleChange}
+    //       />
+    //     </div>
+    //     <div className="flex-row space-between my-2">
+    //       <label htmlFor="pwd">Password:</label>
+    //       <input
+    //         placeholder="******"
+    //         name="password"
+    //         type="password"
+    //         id="pwd"
+    //         onChange={handleChange}
+    //       />
+    //     </div>
+    //     {error ? (
+    //       <div>
+    //         <p className="error-text">The provided credentials are incorrect</p>
+    //       </div>
+    //     ) : null}
+    //     <div className="flex-row flex-end">
+    //       <button type="submit">Submit</button>
+    //     </div>
+    //   </form>
+    // </div>
   );
 }
 
