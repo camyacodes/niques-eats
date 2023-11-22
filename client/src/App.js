@@ -59,7 +59,7 @@ function App() {
                 <Route path="/success" element={<Success />} />
                 <Route path="/checkout" element={<Checkout />} />
 
-                <Route element={<NoMatch />} />
+                <Route path="*" element={<NoMatch />} />
               </Routes>
             </div>
           </StoreProvider>
