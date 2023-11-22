@@ -7,9 +7,7 @@
   border-color: #512b00 !important;
 }
 #delivery-form {
-/* background-color: #512b00; */
 top: 0;
-/* padding: 0; */
 margin:0;
 
 }
@@ -53,10 +51,7 @@ margin:0;
   border: none;
 }
 
-#spinner {
-  height:2vw;
 
-}
 
 #form-input-area {
   background-color: #f8e3cd;
@@ -74,8 +69,3 @@ margin:0;
   top:0,
 }
 
-@media screen and (max-width: 360px) {
-
-  
-
- }

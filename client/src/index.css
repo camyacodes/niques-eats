@@ -69,12 +69,6 @@ a:visited {
 	color: inherit;
 }
 
-
-#login {
-	padding: 8vw 0;
-	text-align: center;
-}
-
 #signup {
 	padding: 8vw 8vw 8vw 35vw;
 	text-align: center;
@@ -231,3 +225,11 @@ a:visited {
 	flex:2
 }
 
+@media screen and (max-width: 767px) {
+	
+#signup {
+	padding: 8vw 4vw;
+	text-align: center;
+}
+
+}

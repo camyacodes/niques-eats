@@ -57,43 +57,6 @@ function ProductItem(item) {
     }
   };
 
-  // const { cart } = state;
-
-  // const addToCart = () => {
-  // 	const itemInCart = cart.find((cartItem) => cartItem._id === _id);
-  // 	if (itemInCart) {
-  // 		dispatch({
-  // 			type: UPDATE_CART_QUANTITY,
-  // 			_id: _id,
-  // 			purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-  // 		});
-  // 		idbPromise("cart", "put", {
-  // 			...itemInCart,
-  // 			purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-  // 			date: deliveryDate,
-  // 		});
-  // 	} else {
-  // 		dispatch({
-  // 			type: ADD_TO_CART,
-  // 			product: { ...item, purchaseQuantity: 1, date: deliveryDate },
-  // 		});
-  // 		idbPromise("cart", "put", {
-  // 			...item,
-  // 			purchaseQuantity: 1,
-  // 			date: deliveryDate,
-  // 		});
-  // 		console.log(itemInCart);
-  // 	}
-  // };
-
-  // Calendar functions
-
-  // function onDateChange(e) {
-  //   const deliveryDate = e["_d"];
-
-  //   setDeliveryDate(deliverDate);
-  // }
-
   var valid = function (current) {
     const start = moment().add(3, "days");
     const end = moment().add(10, "days");
@@ -138,7 +101,7 @@ function ProductItem(item) {
                 <div id="card-btn">
                   <button
                     type="button"
-                    className="btn btn-primary add-to-cart"
+                    className="btn add-to-cart"
                     data-bs-toggle="modal"
                     data-bs-target={`#modal${_id}`}
                   >

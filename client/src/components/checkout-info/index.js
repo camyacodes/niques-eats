@@ -1,18 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../checkout-info/style.css";
 import { useStoreContext } from "../../utils/GlobalState";
 import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_LOGGEDINUSER } from "../../utils/queries";
 import { ADD_ORDER } from "../../utils/mutations";
-import { ADD_MULTIPLE_TO_CART, CLEAR_CART } from "../../utils/actions";
+import { CLEAR_CART } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
-// import { QUERY_CHECKOUT } from "../../utils/queries";
-// import { loadStripe } from "@stripe/stripe-js";
-import { useLazyQuery } from "@apollo/client";
-import spinner from "../../assets/spinner.gif";
 import { useState } from "react";
-
-// const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 export default function CheckoutInfo() {
   const { loading, data: loginData } = useQuery(QUERY_LOGGEDINUSER);
@@ -21,7 +15,6 @@ export default function CheckoutInfo() {
   const flState = "Florida";
   const flCity = "Orlando";
 
-  // const [getCheckout, { loading, data }] = useLazyQuery(QUERY_CHECKOUT);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -42,18 +35,6 @@ export default function CheckoutInfo() {
     });
   }
 
-  // useEffect(() => {
-  //   async function getCart() {
-  //     const cart = await idbPromise("cart", "get");
-  //     dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
-  //   }
-
-  //   if (!state.cart.length) {
-  //     getCart();
-  //   }
-  // }, [state.cart.length, dispatch, state.cart]);
-
-  // console.log(state.cart)
   function calculateTotal() {
     let sum = 0;
     state.cart.forEach((item) => {
@@ -61,8 +42,6 @@ export default function CheckoutInfo() {
     });
     return sum.toFixed(2);
   }
-
-  // console.log(state.cart);
 
   const submitCheckout = async (event) => {
     event.preventDefault();
@@ -85,28 +64,6 @@ export default function CheckoutInfo() {
     idbPromise("cart", "clear");
     window.location.assign("/success");
   };
-
-  // useEffect(() => {
-  // 	async function saveOrder() {
-  // 		const cart = await idbPromise("cart", "get");
-  // 		const products = cart.map((item) => item._id);
-
-  // 		if (products.length) {
-  // 			const { data } = await addOrder({ variables: { products } });
-  // 			const productData = data.addOrder.products;
-
-  // 			productData.forEach((item) => {
-  // 				idbPromise("cart", "delete", item);
-  // 			});
-  // 		}
-
-  // 		setTimeout(() => {
-  // 			window.location.assign("/");
-  // 		}, 3000);
-  // 	}
-
-  // 	saveOrder();
-  // }, [addOrder]);
 
   return (
     <div className="col-2">
@@ -266,7 +223,7 @@ export default function CheckoutInfo() {
         </div>
         {/* form column end */}
       </div>
-      {/* ^ containder end */}
+      {/* ^ container end */}
     </div>
   );
 }

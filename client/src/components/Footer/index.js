@@ -1,11 +1,10 @@
-import React from 'react';
-import "./style.css"
-
+import React from "react";
+import "./style.css";
 
 const Footer = () => {
   return (
-    <footer className='p-1'>
-      &copy;C²
+    <footer className="w-100 p-2">
+      <div className="container">&copy;2023 by C²</div>
     </footer>
   );
 };

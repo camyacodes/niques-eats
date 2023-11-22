@@ -1,19 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
-  Col,
-  Row,
-} from "reactstrap";
+import { Col, Row } from "reactstrap";
 import "../styles/menus.css";
-
-import ProductList from "../components/ProductList";
 import CategoryMenuDinner from "../components/CategoryMenuDinner";
 import Cart from "../components/Cart";
 import DinnerDishes from "../components/DinnerDishes";
@@ -46,14 +34,9 @@ const MenuDinner = () => {
           </div>
 
           <div id="dinner-dishes">
-            {/* <ProductList /> */}
             <DinnerDishes />
           </div>
         </div>
-
-        {/* <div id="scroll-to-top" className ="footer">
-  <a href="#title"> <h4>Scroll To Top ^</h4> </a>
-  </div> */}
       </div>
     </div>
   );

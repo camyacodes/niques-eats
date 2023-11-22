@@ -103,12 +103,6 @@ export const reducer = (state, action) => {
         cartOpen: !state.cartOpen,
       };
 
-    // case ADD_CART_DATE:
-    //   return {
-    //     ...state,
-    //     cartDate: state.date = null
-    // }
-
     default:
       return state;
   }

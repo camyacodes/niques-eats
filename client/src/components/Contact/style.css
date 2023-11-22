@@ -3,8 +3,12 @@
 #contact {
 	background-color: #703c00;
 	color: var(--tertiary);
-
 }
+
+ul {
+	list-style-type: none;
+  }
+
  .align-middle li {
 font-size: 2vw;
  }
@@ -80,9 +84,6 @@ font-size: 2vw;
 	#contact {		
 			height:120vw;
 		}
-	#map {	
-		top:57vw;
-	}
 	}
 @media screen and (max-width: 577px) {
 	#map {	
@@ -119,7 +120,7 @@ font-size: 2vw;
 	@media screen and (max-width: 388px) {
 		#contact {
 			padding:0;		
-			height:140vw;
+			height:150vw;
 		}
 		.align-middle{
 			left:10%;

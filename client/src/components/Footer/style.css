@@ -1,11 +1,6 @@
 /* FOOTER */
 footer {
-	/* position: sticky; */
-    /* bottom:0;
-    right:0; */
-    margin-top: 3vw;
 	color: var(--dark);
-    text-align: right;
+    text-align: left;
     font-size: 1.2vw;
-    /* background-color: #e8b16dbf; */
 }

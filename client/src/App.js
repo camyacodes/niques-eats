@@ -14,18 +14,13 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NoMatch from "./pages/NoMatch";
-import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import SocialButtons from "./components/Social-buttons";
 import MenuBrunch from "./pages/MenuBrunch";
 import MenuDinner from "./pages/MenuDinner";
 import Success from "./pages/Success";
-import Detail from "./pages/Detail";
 import OrderHistory from "./pages/OrderHistory";
 import Checkout from "./pages/Checkout";
-import Admin from "./pages/Admin";
-import Auth from "./utils/auth";
-import Cart from "./components/Cart";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -45,11 +40,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-// const client = new ApolloClient({
-//   link: httpLink,
-//   cache: new InMemoryCache(),
-// });
-
 function App() {
   return (
     <ApolloProvider client={client} id="content">
@@ -63,12 +53,9 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                {/* <Route path="/profile" element={<Profile />} />
-                <Route path="/profile/:username?" component={<Profile />} /> */}
                 <Route path="/menu" element={<MenuBrunch />} />
                 <Route path="/menu/dinner" element={<MenuDinner />} />
                 <Route path="/orderHistory" element={<OrderHistory />} />
-                <Route path="/products/:id" element={<Detail />} />
                 <Route path="/success" element={<Success />} />
                 <Route path="/checkout" element={<Checkout />} />
 

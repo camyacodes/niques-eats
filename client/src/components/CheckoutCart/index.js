@@ -1,24 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CheckoutCartItem from "../CheckoutCartItem";
-import Auth from "../../utils/auth";
 import "./style.css";
 import { useStoreContext } from "../../utils/GlobalState";
-// import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
-import { Link } from "react-router-dom";
 
 const CheckoutCart = () => {
   const [state, dispatch] = useStoreContext();
-
-  // useEffect(() => {
-  // 	async function getCart() {
-  // 		const cart = await idbPromise("cart", "get");
-  // 	}
-
-  // 	if (!state.cart.length) {
-  // 		getCart();
-  // 	}
-  // }, [state.cart.length, dispatch]);
 
   function calculateTotal() {
     let sum = 0;

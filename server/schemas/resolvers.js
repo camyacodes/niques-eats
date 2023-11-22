@@ -1,12 +1,5 @@
 const mongoose = require("mongoose");
-const {
-  User,
-  Product,
-  Category,
-  Order,
-  DishType,
-  ServingTime,
-} = require("../models");
+const { User, Product, Order, DishType, ServingTime } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
@@ -109,10 +102,6 @@ const resolvers = {
     },
     addOrder: async (parent, args, context) => {
       if (context.user) {
-        // Convert product IDs to ObjectId
-        // const productIds = args.products.map(
-        //   (productId) => new mongoose.Types.ObjectId(productId)
-        // );
         const order = await Order.create({
           ...args,
           username: context.user.username,
